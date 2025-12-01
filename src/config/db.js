@@ -5,7 +5,7 @@ const sqlConfig = {
     password: process.env.DB_PASSWORD,
     database: "BTL_DB",
     server: process.env.DB_SERVER,
-    port: process.env.DB_PORT,
+    port: +process.env.DB_PORT,
     pool: {
         max: 10,
         min: 0,
