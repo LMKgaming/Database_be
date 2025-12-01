@@ -1,0 +1,35 @@
+import express from "express";
+import "dotenv/config";
+import db from "./config/db.js";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+// import routes from "./routes/index.js";
+
+await db.connectDB();
+
+const app = express(); 
+
+const port = process.env.PORT || 8080;
+
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+    methods: 'GET,PUT,POST,DELETE',
+    preflightContinue: false,
+    optionsSuccessStatus: 204
+}));
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: true, parameterLimit: 50000 }));
+app.use(express.json());
+app.use(express.raw());
+app.use(express.text());
+
+// routes.use(app);
+
+app.get("/", (req, res) => {
+    res.json(JSON.stringify({message: "Hello world"}))
+})
+
+app.listen(port, () => {
+    console.log(`Your app running on http://localhost:${port}`);
+})
