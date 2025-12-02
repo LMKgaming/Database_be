@@ -3,6 +3,8 @@ import "dotenv/config";
 import db from "./config/db.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import sql from "mssql";
+import userRoutes from "./routes/userRoutes.js";
 // import routes from "./routes/index.js";
 
 await db.connectDB();
@@ -25,6 +27,7 @@ app.use(express.raw());
 app.use(express.text());
 
 // routes.use(app);
+app.use("/api/users", userRoutes);
 
 app.get("/", (req, res) => {
     res.json(JSON.stringify({message: "Hello world"}))
@@ -33,3 +36,4 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
     console.log(`Your app running on http://localhost:${port}`);
 })
+
