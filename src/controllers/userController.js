@@ -79,3 +79,19 @@ export const deleteUser = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 };
+
+// Tìm kiếm theo UserID hoặc Tên hoặc Họ hoặc Email hoặc SĐT hoặc Ngày sinh
+export const searchUsers = async (req, res) => {
+    const { query } = req.query; // Lấy từ ?query=...
+    try {
+        const request = new sql.Request();
+        request.input("SearchTerm", sql.NVarChar(100), `%${query}%`);
+        const result = await request.query(`
+            SELECT * FROM [USER]
+            WHERE UserID LIKE @SearchTerm OR FirstName LIKE @SearchTerm OR LastName LIKE @SearchTerm OR Email LIKE @SearchTerm OR Phone LIKE @SearchTerm OR Birthday LIKE @SearchTerm
+        `);
+        res.status(200).json(result.recordset);
+    } catch (error) {
+        res.status(500).json({ message: "Lỗi tìm kiếm: " + error.message });
+    }
+};
