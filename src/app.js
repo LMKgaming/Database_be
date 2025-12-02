@@ -3,7 +3,7 @@ import "dotenv/config";
 import db from "./config/db.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-// import routes from "./routes/index.js";
+import routes from "./routes/index.js";
 
 await db.connectDB();
 
@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(express.raw());
 app.use(express.text());
 
-// routes.use(app);
+routes.use(app);
 
 app.get("/", (req, res) => {
     res.json(JSON.stringify({message: "Hello world"}))

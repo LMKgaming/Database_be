@@ -22,8 +22,8 @@ const connectDB = async () => {
     try {
         await sql.connect(sqlConfig);
         console.log("✅ Microsoft SQL server connected");
-        let a = await sql.query("SELECT * FROM [USER]")
-        console.log(a);
+        // let a = await sql.query("SELECT * FROM [USER]")
+        // console.log(a);
     } catch (error) {
         console.error("❌ Microsoft SQL server connection failed:", error);
         await connectDB();
