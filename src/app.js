@@ -5,6 +5,8 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import sql from "mssql";
 import userRoutes from "./routes/userRoutes.js";
+import procedureRoutes from "./routes/procedure.js"; // Thêm dòng này
+
 // import routes from "./routes/index.js";
 
 await db.connectDB();
@@ -14,7 +16,7 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: '*',
     credentials: true,
     methods: 'GET,PUT,POST,DELETE',
     preflightContinue: false,
@@ -28,6 +30,7 @@ app.use(express.text());
 
 // routes.use(app);
 app.use("/api/users", userRoutes);
+app.use("/api/procedure", procedureRoutes); // Thêm dòng này
 
 app.get("/", (req, res) => {
     res.json(JSON.stringify({message: "Hello world"}))
@@ -36,4 +39,3 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
     console.log(`Your app running on http://localhost:${port}`);
 })
-
