@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import sql from "mssql";
 import userRoutes from "./routes/userRoutes.js";
 import procedureRoutes from "./routes/procedure.js"; // Thêm dòng này
+import revenueRoutes from "./routes/revenue.js";
 
 // import routes from "./routes/index.js";
 
@@ -31,6 +32,7 @@ app.use(express.text());
 // routes.use(app);
 app.use("/api/users", userRoutes);
 app.use("/api/procedure", procedureRoutes); // Thêm dòng này
+app.use("/api/movies", revenueRoutes);
 
 app.get("/", (req, res) => {
     res.json(JSON.stringify({message: "Hello world"}))
